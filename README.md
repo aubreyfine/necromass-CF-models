@@ -4,7 +4,12 @@ _Aubrey K. Fine, Fernanda Santos, Larry M. York_
 Environmental Sciences Division & Biosciences Division, Oak Ridge National Laboratory
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![renv](https://img.shields.io/badge/reproducibility-renv-blue)](https://rstudio.github.io/renv/)
+[![CC BY 4.0](https://img.shields.io/badge/Data%20License-CC%20BY%204.0-blue.svg)](LICENSE-DATA)
+[![Reproducibility: renv](https://img.shields.io/badge/reproducibility-renv-blue)](https://rstudio.github.io/renv/)
+![R >= 4.3](https://img.shields.io/badge/R-%3E%3D4.3-blue)
+![Python 3.11](https://img.shields.io/badge/Python-3.11-blue)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16905679.svg)](https://doi.org/10.5281/zenodo.16905679)
+![CI](https://github.com/<your-username>/<your-repo>/actions/workflows/ci.yml/badge.svg)
 
 ## 🔬 Overview
 
@@ -13,20 +18,20 @@ This repository contains code, data, and figures for the manuscript:
 > **Trait Variation and Structural Bias in Conversion-Factor Models of Soil Microbial Necromass Carbon**  
 > Submitted to *Soil Biology & Biochemistry* (202X)
 
-We evaluate the assumptions and uncertainty surrounding fixed conversion factors (CFs) used to estimate microbial necromass carbon (necC) from amino sugar biomarkers, muramic acid (MurA) and glucosamine (GlcN). The analysis combines:
+We evaluate the assumptions and uncertainty surrounding fixed conversion factors (CFs) used to estimate microbial necromass carbon from amino sugar biomarkers, muramic acid (MurA) and glucosamine (GlcN). The analysis combines:
 
 - taxonomic variation in MurA and GlcN concentrations,  
 - CF-based necromass models versus a direct carbon–mass approach, and  
-- global sensitivity analysis (Sobol) to identify key drivers of uncertainty in the necromass fraction of SOC (fₙₑcC).
+- global sensitivity analysis (Sobol) to identify key drivers of uncertainty in the necromass fraction of SOC (*f<sub>necC</sub>*).
 
 ---
 
 ## 📁 Repository Structure
 
 - `analysis/`: R and Python scripts and figure generation.
-- `data/`: raw, processes, and derived datasets (+ metadata).
+- `data/`: raw, processed, and derived datasets (+ metadata).
 - `manuscript/`: manuscript text, journal figures, submission files.
-- `supplement/`: supplementary figures and tables, plus a methods README mapping scripts -> output.
+- `supplement/`: supplementary figures and tables, plus a methods README mapping scripts → output.
 - `env/`: renv lock + conda environment. 
 - `github/`: CI workflows.
 ---
@@ -55,59 +60,23 @@ We recommend using `renv` for reproducible environments:
 ```r
 install.packages("renv")  # if needed
 renv::restore()
+```
 
 ---
 
 ### Python
 
-Some functionality (e.g., sensitivity analysis scaffolding) assumes a Python environment described in: 
-- env/environment.yml
+Sensitivity-analysis utilities use a minimal Python environment defined in: 
 
-Create it with: 
+```python
+- env/environment.yml
 ```
+Create it with: 
+
+```python
 conda env create -f env/environment.yml
 conda activate necromass-cf
-
-
-
-## 🧪 Reproducibility
-
-To reproduce the key findings and figures:
-
-1. Clone this repo and set your working directory
-    ```r
-    setwd("path/to/necromass-cf-uncertainty")
-    ```
-2. Run R setup
-This loads packages, sets theme defaults, and checks environment:
-
-Rscript analysis/R/01_setup.R
-
-3. Generate figures (main paper)
-Each script is self-contained and writes:
--preview panels → analysis/figures/
-
--publication-ready panels → manuscript/figures/
-
-# Figure 2
-Rscript analysis/R/06_Figure2_TraitDistributions.R
-
-# Figure 3
-Rscript analysis/R/07_Figure3_SobolIndices.R
-
-# Figure 4
-Rscript analysis/R/07_Figure4_Traits_vs_CF_v2.R
-
-# Figure 5
-Rscript analysis/R/08_Figure5_Diagnostics.R
-
-# Figure 6
-Rscript analysis/R/09_Figure6_ModelComparisons_v2.R
-
-# Figure 7
-Rscript analysis/R/10_Figure7_Feasibility.R
-
----
+```
 
 ## 📊 Figures and Tables
 
@@ -115,17 +84,66 @@ Rscript analysis/R/10_Figure7_Feasibility.R
 - **Supplementary figures:** S1-S11
 - **Tables:** 1-2 and S1-S9
 
+Script-to-output mapping is documented in: 
+```
+supplement/methods/README.txt
+```
+
+---
+
+## 🧪 Reproducibility
+
+To reproduce the key findings and figures:
+
+1. Clone this repository
+    ```
+    git clone https://github.com/<your-username>/necromass-cf-paper.git
+    cd necromass-cf-paper
+    ```
+2. Run R setup
+This loads packages, sets theme defaults, and checks environment:
+```r
+Rscript analysis/R/01_setup.R
+```
+3. Generate individual figures
+
+Each script is self-contained and writes:
+
+-preview panels → analysis/figures/
+
+-publication-ready panels → manuscript/figures/
+
+```
+Rscript analysis/R/06_Figure2_TraitDistributions.R
+Rscript analysis/R/07_Figure3_SobolIndices.R
+Rscript analysis/R/07_Figure4_Traits_vs_CF_v2.R
+Rscript analysis/R/08_Figure5_Diagnostics.R
+Rscript analysis/R/09_Figure6_ModelComparisons_v2.R
+Rscript analysis/R/10_Figure7_Feasibility.R
+```
+---
+
+4. Build all figures at once
+
+```
+make figs
+```
+
+---
+
+## 📂 Data Availability
+- All datasets used in this study (amino sugar trait compilations and soil observations) are deposited on Zenodo and publically available:
+  https://doi.org/10.5281/zenodo.16905679
+- Processed datasets and derived outputs generated by the analysis scripts are stored under the data/processed and data/derived directories.
+- No proprietary, confidential, or restricted data were used.
+
 ---
 
 ## 📜 License
 
-This work is released under the MIT License.
+- **Code:** MIT License (see [`LICENSE`](LICENSE))
+- **Data:** CC BY 4.0 (see [`LICENSE-DATA`](LICENSE-DATA))
 
----
-
-## 📫 Contact
-
-For questions, contact [Dr. Aubrey Fine](mailto:fineaubrey@gmail.com)
 ---
 
 ## 🔗 Citation
@@ -134,6 +152,18 @@ Please cite the following if you use this repository:
 
 > Fine, A.K., Santos, F., York, L. (202X). *Trait Variation and Structural Bias in Conversion Factor Models of Soil Microbial Necromass Carbon*. Submitted to *Soil Biology and Biochemistry*.  
 > DOI: https://doi.org/10.5281/zenodo.16905679
+
+A machine-readable citation file is included in [`CITATION.cff`](CITATION.cff).
+
+---
+
+## 📫 Contact
+For questions, please contact:
+📧 Dr. Aubrey K. Fine — fineaubrey@gmail.com
+
+---
+
+
 
 
 
