@@ -1,0 +1,6 @@
+# R outputs to ignore
+outputs/figures/
+outputs/tables/
+
+# RStudio
+.Rproj.user/
