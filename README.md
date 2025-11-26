@@ -68,13 +68,11 @@ renv::restore()
 ### Python
 
 Sensitivity-analysis utilities use a minimal Python environment defined in: 
+'env/environment.yml'.
 
-```python
--env/environment.yml
-```
 Create it with: 
 
-```python
+```bash
 conda env create -f env/environment.yml
 conda activate necromass-cf
 ```
@@ -138,7 +136,7 @@ Rscript analysis/R/10_Figure7_Feasibility.R
 **Optional: generate all figures at once**
 If you have ['make'](make) installed: 
 
-```python
+```bash
 make figs
 ```
 
@@ -153,10 +151,7 @@ Otherwise, run each script individually (above).
 - **Tables:** 1-2 and S1-S9
 
 Script-to-output mapping is documented in: 
-
-```python
-supplement/methods/README.txt'
-```
+'supplement/methods/README.txt'.
 
 ---
 
