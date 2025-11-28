@@ -67,16 +67,38 @@ renv::restore()
 
 ### Python
 
-Sensitivity-analysis utilities use a minimal Python environment defined in: 
-'env/environment.yml'.
+Global sensitivity analyses and necromass-CF diagnostics use a minimal Python environment defined in:
 
-Create it with: 
+```bash
+env/environment.yml
+```
+
+Create and activate it with:
 
 ```bash
 conda env create -f env/environment.yml
 conda activate necromass-cf
 ```
 
+Key Python scripts are located in `analysis/Python/`:
+
+- `model_definitions.py` — data loading, trait distributions, and CF / fnecC model functions
+
+- `gsa_numeric.py` — Sobol, Delta, and Morris analyses; writes tidy CSVs to `data/derived/gsa/`
+
+- `rb_significance.py` — rB sensitivity, ΔN_F, Δf_necC, truncation, and R distributions
+
+- `run_all_gsa.py` — convenience driver that runs all of the above in sequence
+
+To run all global sensitivity and rB analyses in one step:
+
+```
+python analysis/Python/run_all_gsa.py
+```
+
+Numeric outputs are written to `data/derived/gsa/` and are consumed by the R scripts that generate figures.
+
+---
 
 ## 🧪 Reproducibility
 
@@ -97,7 +119,7 @@ or in R:
    
 This loads packages, sets theme defaults, and checks environment:
 
-```r
+```bash
 Rscript analysis/R/01_setup.R
 ```
 
