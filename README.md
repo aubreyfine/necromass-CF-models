@@ -34,7 +34,8 @@ We evaluate the assumptions and uncertainty surrounding fixed conversion factors
 - `manuscript/`: manuscript text, journal figures, submission files.
 - `supplement/`: supplementary figures and tables, plus a methods README mapping scripts → output.
 - `env/`: R renv lockfile + Python conda environment. 
-- `github/`: CI workflows (GitHub Actions).
+- `.github/`: CI workflows (GitHub Actions).
+- 
 ---
 
 ## 📦 Software Requirements
@@ -94,6 +95,7 @@ To run all global sensitivity and rB analyses in one step:
 
 ```
 python analysis/Python/run_all_gsa.py
+
 ```
 
 Numeric outputs are written to `data/derived/gsa/` and are consumed by the R scripts that generate figures.
@@ -134,10 +136,10 @@ Rscript analysis/R/01_setup.R
 
 ```
 # Figure 2
-Rscript analysis/R/06_Figure2_TraitDistributions.R
+Rscript analysis/R/05_Figure2_TraitDistributions.R
 
 # Figure 3
-Rscript analysis/R/07_Figure3_SobolIndices.R
+Rscript analysis/R/06_Figure3_SobolIndices.R
 
 # Figure 4
 Rscript analysis/R/07_Figure4_Traits_vs_CF_v2.R
