@@ -34,7 +34,6 @@ We evaluate the assumptions and uncertainty surrounding fixed conversion factors
 - `manuscript/`: manuscript text, journal figures, submission files.
 - `supplement/`: supplementary figures and tables, plus a methods README mapping scripts → output.
 - `env/`: R renv lockfile + Python conda environment. 
-- `.github/`: CI workflows (GitHub Actions).
   
 ---
 
