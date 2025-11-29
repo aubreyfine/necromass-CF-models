@@ -100,6 +100,16 @@ python analysis/Python/run_all_gsa.py
 
 Numeric outputs are written to `data/derived/gsa/` and are consumed by the R scripts that generate figures.
 
+### Relationship between Python and R components
+
+This repository uses a two-stage workflow:
+
+Python (analysis/Python/) performs all global sensitivity analyses (Sobol, Delta, Morris) and *r<sub>B* diagnostics, and writes tidy numeric outputs (CSV files) to `data/derived/gsa/`.
+
+R (`analysis/R/`) reads the CSVs in `data/derived/gsa/` and generates all manuscript and supplementary figures (Figures 2–7, S1–S11), saving publication-ready panels under `manuscript/figures/`.
+
+This separation keeps the numerical analysis and visualization layers distinct while ensuring full reproducibility.
+
 ---
 
 ## 🧪 Reproducibility
@@ -125,11 +135,21 @@ This loads packages, sets theme defaults, and checks environment:
 Rscript analysis/R/01_setup.R
 ```
 
-3. Generate main figures (Figures 2-7)
+3. (Optional but recommended (Tun Python GSA first)
+
+Before generating figures that depend on global sensitivity results, run: 
+
+```bash
+python analysis/Python/run_all_gsa.py
+```
+
+This populates `data/derived/gsa/` with all Sobol/Delta/Morris and *r<sub>B* diagnostic tables used by the R figure scripts. 
+
+4. Generate main figures (Figures 2-7)
 
    Each script:
-   - reads required data from `data/`
-   - generates figure panels
+   - reads required data from `data/` (and GSA outputs from `data/derived/gsa/`)
+   - generates figure panels, and
    - writes outputs to:
      - `analysis/figures/` (PNG preview)
      - `manuscript/figures/` (PDF publication version)
@@ -175,7 +195,7 @@ Otherwise, run each script individually (above).
 - **Tables:** 1-2 and S1-S9
 
 Script-to-output mapping is documented in: 
-'supplement/methods/README.txt'.
+`supplement/methods/README.txt`.
 
 ---
 
