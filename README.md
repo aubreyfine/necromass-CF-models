@@ -35,7 +35,7 @@ We evaluate the assumptions and uncertainty surrounding fixed conversion factors
 - `supplement/`: supplementary figures and tables, plus a methods README mapping scripts → output.
 - `env/`: R renv lockfile + Python conda environment. 
 - `.github/`: CI workflows (GitHub Actions).
-- 
+  
 ---
 
 ## 📦 Software Requirements
